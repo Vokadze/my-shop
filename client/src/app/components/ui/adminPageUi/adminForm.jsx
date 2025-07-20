@@ -6,9 +6,13 @@ import SelectFieldAdmin from "../../common/form/selectFieldAdmin";
 import useForm from "../../../hook/useForm";
 import { useSelector } from "react-redux";
 import { getUserId } from "../../../service/localStorage.service";
+import CountField from "../../common/form/countField";
 
 const AdminForm = ({ data, onSubmit, categoriesList }) => {
-    const { form, handleChange, handleSubmit } = useForm(data, onSubmit);
+    const { form, isValid, handleChange, handleSubmit } = useForm(
+        data,
+        onSubmit
+    );
     const userId = useSelector(getUserId);
 
     if (userId) {
@@ -37,10 +41,11 @@ const AdminForm = ({ data, onSubmit, categoriesList }) => {
                         value={form.price || ""}
                         onChange={handleChange}
                     />
-                    <TextFieldAdmin
+                    <CountField
                         name="count"
                         value={form.count || ""}
                         onChange={handleChange}
+                        // error={form.count}
                     />
                     <TextFieldAdmin
                         name="image"
@@ -49,6 +54,7 @@ const AdminForm = ({ data, onSubmit, categoriesList }) => {
                     />
                     <button
                         type="submit"
+                        disabled={!isValid}
                         className="btn btn-primary w-100 mx-auto"
                     >
                         {data ? "Редактировать" : "Добавить"}

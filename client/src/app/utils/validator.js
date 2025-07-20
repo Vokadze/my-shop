@@ -24,6 +24,18 @@ export function validator(data, config) {
                 break;
             }
 
+            case "isNumber": {
+                const numberRegExp = /^\d+$/g;
+                statusVatidate = !numberRegExp.test(data);
+                break;
+            }
+
+            case "isCount": {
+                const countRegExp = /^\d+\.\d+$/g;
+                statusVatidate = !countRegExp.test(data);
+                break;
+            }
+
             case "isContainDigit": {
                 const digitRegExp = /\d+/g;
                 statusVatidate = !digitRegExp.test(data);
